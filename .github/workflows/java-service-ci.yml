@@ -1,16 +1,28 @@
 name: java-service-ci
 on:
   workflow_call:
-
-permissions:
-  checks: write
+    inputs:
+      isWorkflowTest:
+        description: 'Is this a workflow test?'
+        required: false
+        default: 'false'
+        type: boolean
 
 jobs:
   java-build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+        if: ${{ !github.event.inputs.isWorkflowTest}}
+        with:
+          repository: ${{ (github.event.inputs.isWorkflowTest && 'my-org/testing-repo') || github.repository }}
+      - name: Checkout code for the workflow test
+        uses: actions/checkout@v4
+        if: github.event.inputs.isWorkflowTest
+        with:
+          repository: 'snowcode-lab/dummy-java-template'
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:

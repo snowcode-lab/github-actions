@@ -1,0 +1,14 @@
+name: java-service-ci-test
+on:
+  pull_request:
+#    paths:
+#      - '.gradle/workflows/java-service-ci.yml'
+#      - '.gradle/workflows/java-service-ci-test.yml'
+
+
+permissions:
+  checks: write
+
+jobs:
+  call-workflow:
+    uses: java-service-ci.yml
