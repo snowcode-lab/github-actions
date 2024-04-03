@@ -1,4 +1,4 @@
-name: java-service-ci
+name: java-library-ci
 on:
   workflow_call:
 
