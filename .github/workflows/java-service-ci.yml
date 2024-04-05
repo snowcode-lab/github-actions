@@ -1,6 +1,8 @@
 name: java-service-ci
 on:
   pull_request:
+    paths:
+      - '.github/workflows/java-service-ci.yml'
   workflow_call:
 
 jobs:
